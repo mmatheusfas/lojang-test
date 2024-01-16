@@ -15,7 +15,7 @@ class ApiProvider {
     }
   }
 
-  Future<dynamic> request({required Endpoint endpoint}) async {
+  Future<Response<dynamic>> request({required Endpoint endpoint}) async {
     _dio.options.baseUrl = Constants.baseUrl;
 
     final requestOptions = Options(
@@ -27,10 +27,11 @@ class ApiProvider {
     );
 
     try {
-      return _dio.request(
+      final response = await _dio.get(
         endpoint.path,
         options: requestOptions,
       );
+      return response;
     } on DioException catch (error) {
       throw Exception('Erro na requisição: ${error.message}');
     }
