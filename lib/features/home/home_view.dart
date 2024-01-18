@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lojang_test/features/videos/videos_view.dart';
 
+import '../../support/components/deafult_back_button.dart';
 import '../articles/articles_view.dart';
 import '../quotes/quotes_view.dart';
 
@@ -26,6 +27,7 @@ class _HomeViewState extends State<HomeView> {
           backgroundColor: const Color.fromRGBO(224, 144, 144, 1),
           appBar: AppBar(
             backgroundColor: const Color.fromRGBO(224, 144, 144, 1),
+            leading: const DefaultBackButton(),
             title: const Text(
               'INSPIRAÇÕES',
               style: TextStyle(
@@ -83,33 +85,17 @@ class _HomeViewState extends State<HomeView> {
                 ],
               ),
             ),
-            leading: IconButton.filled(
-              color: Colors.white,
-              onPressed: () {},
-              icon: const Icon(
-                Icons.arrow_back,
-              ),
-            ),
           ),
         ),
         Positioned.fill(
           top: 190,
-          child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(32),
-                topRight: Radius.circular(32),
-              ),
-            ),
-            child: IndexedStack(
-              index: currentPageIndex,
-              children: const [
-                VideosView(),
-                ArticlesView(),
-                QuotesView(),
-              ],
-            ),
+          child: IndexedStack(
+            index: currentPageIndex,
+            children: [
+              VideosView(),
+              const ArticlesView(),
+              const QuotesView(),
+            ],
           ),
         ),
       ],
