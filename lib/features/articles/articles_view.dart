@@ -1,46 +1,66 @@
 import 'package:flutter/material.dart';
-import 'package:lojang_test/features/articles/article.dart';
+import 'package:lojang_test/support/components/default_loading.dart';
 
 import '../../support/components/default_list_tile.dart';
 import 'article_view_model.dart';
 
-class ArticlesView extends StatelessWidget {
+class ArticlesView extends StatefulWidget {
   const ArticlesView({super.key});
 
   @override
+  State<ArticlesView> createState() => _ArticlesViewState();
+}
+
+class _ArticlesViewState extends State<ArticlesView> {
+  final viewModel = ArticlesViewModel();
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel.getArticles();
+    viewModel.getScrollController.addListener(viewModel.updateVideosList);
+  }
+
+  @override
+  void dispose() {
+    viewModel.getScrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final viewModel = ArticlesViewModel();
+    return Material(
+      borderRadius: const BorderRadius.only(topLeft: Radius.circular(32), topRight: Radius.circular(32)),
+      color: Colors.grey[50],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
+        child: Expanded(
+          child: ListenableBuilder(
+            listenable: viewModel,
+            builder: (context, snapshot) {
+              return Stack(
+                children: [
+                  ListView.separated(
+                    controller: viewModel.getScrollController,
+                    separatorBuilder: (_, __) => const Divider(),
+                    itemCount: viewModel.articlesList.length,
+                    itemBuilder: (_, index) {
+                      final article = viewModel.articlesList[index];
 
-    return Scaffold(
-      backgroundColor: Colors.grey[50],
-      body: FutureBuilder<List<Article>>(
-        future: viewModel.getArticles(page: 1),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
-              child: Expanded(
-                child: ListView.separated(
-                  separatorBuilder: (_, __) => const Divider(),
-                  itemCount: snapshot.data!.length,
-                  itemBuilder: (_, index) {
-                    final article = snapshot.data![index];
-
-                    return DefaultListTile(
-                      article: article,
-                    );
-                  },
-                ),
-              ),
-            );
-          }
-
-          return Container();
-        },
+                      return DefaultListTile(
+                        article: article,
+                      );
+                    },
+                  ),
+                  Visibility(
+                    visible: viewModel.isLoading,
+                    child: const DefaultLoading(),
+                  )
+                ],
+              );
+            },
+          ),
+        ),
       ),
     );
   }
