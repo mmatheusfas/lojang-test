@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:lojang_test/api/errors/connectivity_error.dart';
 import 'package:lojang_test/api/models/endpoint.dart';
 import 'package:lojang_test/support/constants.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -32,8 +33,8 @@ class ApiProvider {
         options: requestOptions,
       );
       return response;
-    } on DioException catch (error) {
-      throw Exception('Erro na requisição: ${error.message}');
+    } on ConnectivityError catch (error) {
+      throw Exception(error.message);
     }
   }
 }
