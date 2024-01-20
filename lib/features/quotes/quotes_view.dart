@@ -40,14 +40,14 @@ class _QuotesViewState extends State<QuotesView> {
             builder: (context, snapshot) {
               return Stack(
                 children: [
-                  ListView.separated(
+                  ListView.builder(
                     controller: viewModel.getScrollController,
-                    separatorBuilder: (_, __) => const Divider(),
                     itemCount: viewModel.quotesList.length,
                     itemBuilder: (_, index) {
+                      var imageController = index;
                       final quote = viewModel.quotesList[index];
 
-                      return QuoteListTile(quote: quote);
+                      return QuoteListTile(quote: quote, imageController: imageController);
                     },
                   ),
                   Visibility(
