@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lojang_test/support/utils/app_fonts.dart';
 
 class ShareButton extends StatelessWidget {
   final Color primaryColor;
@@ -27,9 +28,9 @@ class ShareButton extends StatelessWidget {
       ),
       label: Text(
         'Compartilhar',
-        style: TextStyle(
-          fontSize: 12,
-          color: primaryColor,
+        style: AppFonts.asapSemiBold(
+          12,
+          primaryColor,
         ),
       ),
     );

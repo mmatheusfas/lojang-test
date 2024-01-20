@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:lojang_test/features/articles/article.dart';
-import 'package:lojang_test/features/articles/article_details.dart/article_details_view.dart';
+import 'package:lojang_test/features/articles/article_details/article_details_view.dart';
 import 'package:lojang_test/features/videos/video.dart';
 import 'package:lojang_test/support/components/share_button.dart';
 

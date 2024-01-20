@@ -11,7 +11,7 @@ class DefaultBackButton extends StatelessWidget {
     return IconButton.filled(
       onPressed: onTapBackButton,
       style: IconButton.styleFrom(
-        backgroundColor: const Color.fromRGBO(224, 144, 144, 0.5),
+        backgroundColor: Colors.transparent,
       ),
       icon: SvgPicture.asset('assets/images/ic_arrow_back.svg'),
     );
