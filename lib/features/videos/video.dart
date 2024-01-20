@@ -26,4 +26,15 @@ class Video {
   static List<Video> fromMapList(List mapList) {
     return mapList.map((map) => Video.fromMap(map)).toList();
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'url2': videoUrl,
+      'aws_url': awsUrl,
+      'image_url': imageUrl,
+    };
+  }
 }

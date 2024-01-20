@@ -17,4 +17,12 @@ class Quote {
   static List<Quote> fromMapList(List mapList) {
     return mapList.map((map) => Quote.fromMap(map)).toList();
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'text': text,
+      'author': author,
+    };
+  }
 }
