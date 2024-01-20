@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:lojang_test/features/articles/article_details.dart/article_details_view_model.dart';
-import 'package:lojang_test/features/articles/article_details.dart/components/author_card.dart';
+import 'package:lojang_test/features/articles/article_details/article_details_view_model.dart';
+import 'package:lojang_test/features/articles/article_details/components/author_card.dart';
 import 'package:lojang_test/support/components/deafult_back_button.dart';
+import 'package:lojang_test/support/placeholders/error_placeholder.dart';
 
+import '../../../support/utils/app_fonts.dart';
 import '../article.dart';
 
 class ArticleDetailsView extends StatefulWidget {
@@ -52,6 +54,17 @@ class _ArticleDetailsViewState extends State<ArticleDetailsView> {
                       return const Center(child: CircularProgressIndicator());
                     }
 
+                    if (viewModel.connectivityError.isNotEmpty) {
+                      return Expanded(
+                        child: ErrorPlaceHolder(
+                          errorMessage: viewModel.connectivityError,
+                          onTapReload: () {
+                            viewModel.didTapReload(id: widget.article.id);
+                          },
+                        ),
+                      );
+                    }
+
                     return SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -73,16 +86,15 @@ class _ArticleDetailsViewState extends State<ArticleDetailsView> {
                           Text(
                             viewModel.detailedArticle?.title ?? '',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black.withOpacity(0.55),
+                            style: AppFonts.asapSemiBold(
+                              18,
+                              Colors.black.withOpacity(0.55),
                             ),
                           ),
                           const SizedBox(height: 16),
                           Html(data: viewModel.detailedArticle?.fullText ?? ''),
                           const SizedBox(height: 16),
-                          const AuthorCard(),
+                          AuthorCard(detailedArticle: viewModel.detailedArticle),
                         ],
                       ),
                     );
