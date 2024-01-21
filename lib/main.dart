@@ -1,3 +1,4 @@
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:lojang_test/features/splash/splash_view.dart';
 import 'package:lojang_test/services/service/service_locator.dart';
@@ -10,8 +11,9 @@ void main() {
   syncManager.scheduleSynchronization();
 
   runApp(
-    const MaterialApp(
-      home: SplashView(),
+    MaterialApp(
+      navigatorObservers: [ChuckerFlutter.navigatorObserver],
+      home: const SplashView(),
       debugShowCheckedModeBanner: false,
     ),
   );

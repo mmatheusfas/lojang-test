@@ -1,18 +1,18 @@
 import 'dart:io';
 
+import 'package:chucker_flutter/chucker_flutter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:lojang_test/api/errors/connectivity_error.dart';
 import 'package:lojang_test/api/models/endpoint.dart';
 import 'package:lojang_test/support/constants.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiProvider {
   final Dio _dio = Dio();
 
   ApiProvider() {
     if (kDebugMode) {
-      _dio.interceptors.add(PrettyDioLogger());
+      _dio.interceptors.add(ChuckerDioInterceptor());
     }
   }
 
