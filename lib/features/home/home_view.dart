@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lojang_test/features/home/home_view_model.dart';
+import 'package:lojang_test/support/style/app_colors.dart';
 
 import '../../support/components/deafult_back_button.dart';
 import '../articles/articles_view.dart';
@@ -25,18 +26,18 @@ class _HomeViewState extends State<HomeView> {
         return Stack(
           children: [
             Scaffold(
-              backgroundColor: const Color.fromRGBO(224, 144, 144, 1),
+              backgroundColor: AppColors.salmon,
               appBar: AppBar(
-                backgroundColor: const Color.fromRGBO(224, 144, 144, 1),
+                backgroundColor: AppColors.salmon,
                 leading: DefaultBackButton(
                   onTapBackButton: () {},
                 ),
                 title: const Text(
                   'INSPIRAÇÕES',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: AppColors.white,
                   ),
                 ),
                 centerTitle: true,
@@ -44,10 +45,10 @@ class _HomeViewState extends State<HomeView> {
                   preferredSize: const Size(double.infinity, 80),
                   child: NavigationBar(
                     elevation: 0,
-                    backgroundColor: const Color.fromRGBO(224, 144, 144, 1),
+                    backgroundColor: AppColors.salmon,
                     onDestinationSelected: viewModel.changeCurrentIndex,
                     selectedIndex: viewModel.currentIndex,
-                    indicatorColor: Colors.white,
+                    indicatorColor: AppColors.white,
                     destinations: const [
                       DefaultNavigationDestination(title: 'Videos'),
                       DefaultNavigationDestination(title: 'Artigos'),
@@ -61,10 +62,10 @@ class _HomeViewState extends State<HomeView> {
               top: 190,
               child: IndexedStack(
                 index: viewModel.currentIndex,
-                children: [
+                children: const [
                   VideosView(),
-                  const ArticlesView(),
-                  const QuotesView(),
+                  ArticlesView(),
+                  QuotesView(),
                 ],
               ),
             ),

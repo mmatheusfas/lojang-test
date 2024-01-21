@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lojang_test/support/utils/app_fonts.dart';
+import 'package:lojang_test/support/style/app_colors.dart';
+import 'package:lojang_test/support/style/app_fonts.dart';
 
 class ErrorPlaceHolder extends StatelessWidget {
   final String errorMessage;
@@ -21,29 +22,20 @@ class ErrorPlaceHolder extends StatelessWidget {
           children: [
             Text(
               'OPS!',
-              style: AppFonts.asapBold(
-                16,
-                const Color.fromRGBO(128, 132, 143, 1),
-              ),
+              style: AppFonts.asapBold(16, AppColors.darkGrey),
             ),
             const SizedBox(height: 16),
             Text(
               errorMessage,
               textAlign: TextAlign.center,
-              style: AppFonts.asapRegular(
-                16,
-                const Color.fromRGBO(128, 132, 143, 1),
-              ),
+              style: AppFonts.asapRegular(16, AppColors.darkGrey),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: onTapReload,
               child: Text(
                 'Recarregar',
-                style: AppFonts.asapBold(
-                  12,
-                  const Color.fromRGBO(128, 132, 143, 1),
-                ),
+                style: AppFonts.asapBold(12, AppColors.darkGrey),
               ),
             )
           ],

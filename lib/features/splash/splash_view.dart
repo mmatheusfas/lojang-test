@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lojang_test/features/home/home_view.dart';
 import 'package:lojang_test/features/splash/splash_view_model.dart';
+import 'package:lojang_test/support/style/app_colors.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -30,10 +31,10 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(224, 144, 144, 1),
+      backgroundColor: AppColors.salmon,
       body: AnimatedBuilder(
         animation: viewModel,
-        builder: (context, child) {
+        builder: (_, __) {
           return Padding(
             padding: const EdgeInsets.all(32),
             child: Center(

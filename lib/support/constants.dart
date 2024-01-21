@@ -4,4 +4,6 @@ class Constants {
   static const String articlesTable = 'articles2';
   static const String videosTable = 'videos';
   static const String quotesTable = 'quotes';
+  static const String defaultAvatarImage =
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6Uz65nCXd9BxvWkiNAog1fweewd0FAPRcVA&usqp=CAU';
 }

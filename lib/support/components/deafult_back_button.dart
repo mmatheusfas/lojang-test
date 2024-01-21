@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lojang_test/support/style/app_colors.dart';
 
 class DefaultBackButton extends StatelessWidget {
   final VoidCallback? onTapBackButton;
@@ -11,7 +12,7 @@ class DefaultBackButton extends StatelessWidget {
     return IconButton.filled(
       onPressed: onTapBackButton,
       style: IconButton.styleFrom(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.transparent,
       ),
       icon: SvgPicture.asset('assets/images/ic_arrow_back.svg'),
     );

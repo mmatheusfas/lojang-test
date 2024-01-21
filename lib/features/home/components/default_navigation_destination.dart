@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lojang_test/support/style/app_colors.dart';
 
-import '../../../support/utils/app_fonts.dart';
+import '../../../support/style/app_fonts.dart';
 
 class DefaultNavigationDestination extends StatelessWidget {
   final String title;
@@ -11,14 +12,14 @@ class DefaultNavigationDestination extends StatelessWidget {
     return NavigationDestination(
       icon: Text(
         title,
-        style: AppFonts.asapBold(16, Colors.white),
+        style: AppFonts.asapBold(16, AppColors.white),
       ),
       label: '',
       selectedIcon: Text(
         title,
         style: AppFonts.asapBold(
           16,
-          const Color.fromRGBO(224, 144, 144, 1),
+          AppColors.salmon,
         ),
       ),
     );
