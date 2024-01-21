@@ -23,20 +23,8 @@ class Article {
         authorName = map['author_name'],
         articleUrl = map['url'];
 
-  Article.fromLocalMap(Map<String, dynamic> map)
-      : id = map['id'],
-        description = map['description'],
-        title = map['title'],
-        imageUrl = map['imageUrl'],
-        authorName = map['authorName'],
-        articleUrl = map['articleUrl'];
-
   static List<Article> fromMapList(List mapList) {
     return mapList.map((map) => Article.fromMap(map)).toList();
-  }
-
-  static List<Article> fromLocalMapList(List mapList) {
-    return mapList.map((map) => Article.fromLocalMap(map)).toList();
   }
 
   Map<String, dynamic> toJson() {

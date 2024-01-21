@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lojang_test/support/components/default_loading.dart';
+import 'package:lojang_test/support/components/infinity_scroll_loading.dart';
+import 'package:lojang_test/support/style/app_colors.dart';
 
 import '../../support/components/default_list_tile.dart';
 import 'article_view_model.dart';
@@ -30,14 +32,21 @@ class _ArticlesViewState extends State<ArticlesView> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      borderRadius: const BorderRadius.only(topLeft: Radius.circular(32), topRight: Radius.circular(32)),
-      color: Colors.grey[50],
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(32),
+        topRight: Radius.circular(32),
+      ),
+      color: AppColors.lightGrey,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
         child: Expanded(
           child: ListenableBuilder(
             listenable: viewModel,
-            builder: (context, snapshot) {
+            builder: (_, snapshot) {
+              if (viewModel.isLoading && viewModel.articlesList.isEmpty) {
+                return const DefaultLoading();
+              }
+
               return Stack(
                 children: [
                   ListView.separated(
@@ -54,7 +63,7 @@ class _ArticlesViewState extends State<ArticlesView> {
                   ),
                   Visibility(
                     visible: viewModel.isLoading,
-                    child: const DefaultLoading(),
+                    child: const InfinityScrollLoading(),
                   )
                 ],
               );
