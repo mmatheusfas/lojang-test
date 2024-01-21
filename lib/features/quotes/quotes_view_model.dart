@@ -10,7 +10,6 @@ class QuotesViewModel extends ChangeNotifier {
 
   // ignore: prefer_final_fields
   var _quotes = <Quote>[];
-
   var _page = 1;
   var _isLoading = false;
 
@@ -22,12 +21,16 @@ class QuotesViewModel extends ChangeNotifier {
 
   void getQuotes() async {
     _changeIsLoading(isLoading: true);
-    final newQuotes = await quotesRoutes.getQuotes(page: _page);
-    for (var quotes in newQuotes) {
-      _quotes.add(quotes);
+    try {
+      final newQuotes = await quotesRoutes.getQuotes(page: _page);
+      for (var quotes in newQuotes) {
+        _quotes.add(quotes);
+      }
+      _page++;
+      _changeIsLoading(isLoading: false);
+    } catch (e) {
+      throw Exception('Erro inesperado');
     }
-    _page++;
-    _changeIsLoading(isLoading: false);
   }
 
   void updateQuotesList() async {

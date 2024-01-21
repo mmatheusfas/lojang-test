@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lojang_test/features/quotes/components/quote_list_tile.dart';
 import 'package:lojang_test/features/quotes/quotes_view_model.dart';
+import 'package:lojang_test/support/components/default_loading.dart';
+import 'package:lojang_test/support/style/app_colors.dart';
 
-import '../../support/components/default_loading.dart';
+import '../../support/components/infinity_scroll_loading.dart';
 
 class QuotesView extends StatefulWidget {
   const QuotesView({super.key});
@@ -30,14 +32,21 @@ class _QuotesViewState extends State<QuotesView> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      borderRadius: const BorderRadius.only(topLeft: Radius.circular(32), topRight: Radius.circular(32)),
-      color: Colors.grey[50],
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(32),
+        topRight: Radius.circular(32),
+      ),
+      color: AppColors.lightGrey,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Expanded(
           child: ListenableBuilder(
             listenable: viewModel,
-            builder: (context, snapshot) {
+            builder: (_, snapshot) {
+              if (viewModel.isLoading && viewModel.quotesList.isEmpty) {
+                return const DefaultLoading();
+              }
+
               return Stack(
                 children: [
                   ListView.builder(
@@ -52,7 +61,7 @@ class _QuotesViewState extends State<QuotesView> {
                   ),
                   Visibility(
                     visible: viewModel.isLoading,
-                    child: const DefaultLoading(),
+                    child: const InfinityScrollLoading(),
                   )
                 ],
               );
