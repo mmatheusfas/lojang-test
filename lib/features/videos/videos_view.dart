@@ -4,6 +4,8 @@ import 'package:lojang_test/support/components/default_list_tile.dart';
 import 'package:lojang_test/support/components/default_loading.dart';
 import 'package:lojang_test/support/style/app_colors.dart';
 
+import '../../support/placeholders/error_placeholder.dart';
+
 class VideosView extends StatefulWidget {
   const VideosView({super.key});
 
@@ -35,18 +37,24 @@ class _VideosViewState extends State<VideosView> {
             return const DefaultLoading();
           }
 
+          if (viewModel.errorMessage.isNotEmpty) {
+            return Expanded(
+              child: ErrorPlaceHolder(
+                errorMessage: viewModel.errorMessage,
+              ),
+            );
+          }
+
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
-            child: Expanded(
-              child: ListView.separated(
-                separatorBuilder: (_, __) => const Divider(),
-                itemCount: viewModel.videosList.length,
-                itemBuilder: (_, index) {
-                  final video = viewModel.videosList[index];
+            child: ListView.separated(
+              separatorBuilder: (_, __) => const Divider(),
+              itemCount: viewModel.videosList.length,
+              itemBuilder: (_, index) {
+                final video = viewModel.videosList[index];
 
-                  return DefaultListTile(video: video);
-                },
-              ),
+                return DefaultListTile(video: video, index: index + 1);
+              },
             ),
           );
         },
