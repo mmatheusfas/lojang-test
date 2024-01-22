@@ -35,10 +35,7 @@ class ShareButton extends StatelessWidget {
           : Container(),
       label: Text(
         'Compartilhar',
-        style: AppFonts.asapSemiBold(
-          12,
-          primaryColor,
-        ),
+        style: AppFonts.asapSemiBold(12, primaryColor),
       ),
     );
   }

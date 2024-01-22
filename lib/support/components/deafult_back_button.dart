@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lojang_test/support/components/svg_viewer.dart';
 import 'package:lojang_test/support/style/app_colors.dart';
 
 class DefaultBackButton extends StatelessWidget {
@@ -14,7 +14,7 @@ class DefaultBackButton extends StatelessWidget {
       style: IconButton.styleFrom(
         backgroundColor: AppColors.transparent,
       ),
-      icon: SvgPicture.asset('assets/images/ic_arrow_back.svg'),
+      icon: const SvgViewer.asset(assetName: 'assets/images/ic_arrow_back.svg'),
     );
   }
 }

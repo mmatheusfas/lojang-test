@@ -4,12 +4,12 @@ import 'package:lojang_test/support/style/app_fonts.dart';
 
 class ErrorPlaceHolder extends StatelessWidget {
   final String errorMessage;
-  final void Function() onTapReload;
+  final void Function()? onTapReload;
 
   const ErrorPlaceHolder({
     super.key,
     required this.errorMessage,
-    required this.onTapReload,
+    this.onTapReload,
   });
 
   @override
@@ -31,11 +31,14 @@ class ErrorPlaceHolder extends StatelessWidget {
               style: AppFonts.asapRegular(16, AppColors.darkGrey),
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: onTapReload,
-              child: Text(
-                'Recarregar',
-                style: AppFonts.asapBold(12, AppColors.darkGrey),
+            Visibility(
+              visible: onTapReload != null,
+              child: ElevatedButton(
+                onPressed: onTapReload,
+                child: Text(
+                  'Recarregar',
+                  style: AppFonts.asapBold(12, AppColors.darkGrey),
+                ),
               ),
             )
           ],
