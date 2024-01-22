@@ -5,6 +5,7 @@ import 'package:lojang_test/support/components/default_loading.dart';
 import 'package:lojang_test/support/style/app_colors.dart';
 
 import '../../support/components/infinity_scroll_loading.dart';
+import '../../support/placeholders/error_placeholder.dart';
 
 class QuotesView extends StatefulWidget {
   const QuotesView({super.key});
@@ -39,34 +40,40 @@ class _QuotesViewState extends State<QuotesView> {
       color: AppColors.lightGrey,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Expanded(
-          child: ListenableBuilder(
-            listenable: viewModel,
-            builder: (_, snapshot) {
-              if (viewModel.isLoading && viewModel.quotesList.isEmpty) {
-                return const DefaultLoading();
-              }
+        child: ListenableBuilder(
+          listenable: viewModel,
+          builder: (_, snapshot) {
+            if (viewModel.isLoading && viewModel.quotesList.isEmpty) {
+              return const DefaultLoading();
+            }
 
-              return Stack(
-                children: [
-                  ListView.builder(
-                    controller: viewModel.getScrollController,
-                    itemCount: viewModel.quotesList.length,
-                    itemBuilder: (_, index) {
-                      var imageController = index;
-                      final quote = viewModel.quotesList[index];
-
-                      return QuoteListTile(quote: quote, imageController: imageController);
-                    },
-                  ),
-                  Visibility(
-                    visible: viewModel.isLoading,
-                    child: const InfinityScrollLoading(),
-                  )
-                ],
+            if (viewModel.erroMessage.isNotEmpty) {
+              return Expanded(
+                child: ErrorPlaceHolder(
+                  errorMessage: viewModel.erroMessage,
+                ),
               );
-            },
-          ),
+            }
+
+            return Stack(
+              children: [
+                ListView.builder(
+                  controller: viewModel.getScrollController,
+                  itemCount: viewModel.quotesList.length,
+                  itemBuilder: (_, index) {
+                    var imageController = index;
+                    final quote = viewModel.quotesList[index];
+
+                    return QuoteListTile(quote: quote, imageController: imageController);
+                  },
+                ),
+                Visibility(
+                  visible: viewModel.isLoading,
+                  child: const InfinityScrollLoading(),
+                )
+              ],
+            );
+          },
         ),
       ),
     );
