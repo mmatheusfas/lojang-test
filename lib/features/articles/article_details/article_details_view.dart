@@ -26,7 +26,8 @@ class _ArticleDetailsViewState extends State<ArticleDetailsView> {
   @override
   void initState() {
     super.initState();
-    viewModel.initialize(id: widget.article.id);
+    // viewModel.initialize(id: widget.article.id);
+    viewModel.getArticle(id: widget.article.id);
   }
 
   @override

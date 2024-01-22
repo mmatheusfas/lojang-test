@@ -39,36 +39,34 @@ class _ArticlesViewState extends State<ArticlesView> {
       color: AppColors.lightGrey,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 24),
-        child: Expanded(
-          child: ListenableBuilder(
-            listenable: viewModel,
-            builder: (_, snapshot) {
-              if (viewModel.isLoading && viewModel.articlesList.isEmpty) {
-                return const DefaultLoading();
-              }
+        child: ListenableBuilder(
+          listenable: viewModel,
+          builder: (_, snapshot) {
+            if (viewModel.isLoading && viewModel.articlesList.isEmpty) {
+              return const DefaultLoading();
+            }
 
-              return Stack(
-                children: [
-                  ListView.separated(
-                    controller: viewModel.getScrollController,
-                    separatorBuilder: (_, __) => const Divider(),
-                    itemCount: viewModel.articlesList.length,
-                    itemBuilder: (_, index) {
-                      final article = viewModel.articlesList[index];
+            return Stack(
+              children: [
+                ListView.separated(
+                  controller: viewModel.getScrollController,
+                  separatorBuilder: (_, __) => const Divider(),
+                  itemCount: viewModel.articlesList.length,
+                  itemBuilder: (_, index) {
+                    final article = viewModel.articlesList[index];
 
-                      return DefaultListTile(
-                        article: article,
-                      );
-                    },
-                  ),
-                  Visibility(
-                    visible: viewModel.isLoading,
-                    child: const InfinityScrollLoading(),
-                  )
-                ],
-              );
-            },
-          ),
+                    return DefaultListTile(
+                      article: article,
+                    );
+                  },
+                ),
+                Visibility(
+                  visible: viewModel.isLoading,
+                  child: const InfinityScrollLoading(),
+                )
+              ],
+            );
+          },
         ),
       ),
     );

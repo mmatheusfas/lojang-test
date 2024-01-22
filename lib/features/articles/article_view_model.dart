@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:lojang_test/api/errors/connectivity_error.dart';
 import 'package:lojang_test/api/routes/articles_routes.dart';
 import 'package:lojang_test/features/articles/article.dart';
-import 'package:lojang_test/services/connectivity/check_connectivity.dart';
 
 class ArticlesViewModel extends ChangeNotifier {
   final ArticlesRoutes articlesRoutes = ArticlesRoutes();
@@ -35,11 +34,14 @@ class ArticlesViewModel extends ChangeNotifier {
     } on ConnectivityError catch (e) {
       _connectivityError = e.message;
       _changeIsLoading(isLoading: false);
+    } catch (e) {
+      _connectivityError = 'Erro desconhecido, tente novamente mais tarde';
+      _changeIsLoading(isLoading: false);
     }
   }
 
   void updateVideosList() async {
-    if (isFullyScrolled && !_isLoading && await CheckConnectivity.checkDeviceConnectivity()) {
+    if (isFullyScrolled && !_isLoading) {
       getArticles();
     }
   }

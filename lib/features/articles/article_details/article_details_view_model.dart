@@ -14,28 +14,26 @@ class ArticleDetailsViewModel extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String get connectivityError => _connectivityError;
 
-  void initialize({required int id}) async {
-    _detailedArticle = await getArticle(id: id);
-  }
-
-  Future<DetailedArticle?> getArticle({required int id}) async {
+  void getArticle({required int id}) async {
     _changeIsLoading(isLoading: true);
+
     try {
-      final article = await articlesRoutes.getArticlesById(id: id);
+      _detailedArticle = await articlesRoutes.getArticlesById(id: id);
       _changeIsLoading(isLoading: false);
       _connectivityError = '';
-      return article;
     } on ConnectivityError catch (e) {
       _connectivityError = e.message;
       _changeIsLoading(isLoading: false);
-      return null;
+    } catch (e) {
+      _connectivityError = 'Erro desconhecido, tente novamente mais tarde';
+      _changeIsLoading(isLoading: false);
     }
   }
 
   void didTapReload({required int id}) {
     _changeIsLoading(isLoading: true);
     try {
-      initialize(id: id);
+      getArticle(id: id);
     } on ConnectivityError catch (e) {
       _connectivityError = e.message;
       _changeIsLoading(isLoading: false);
