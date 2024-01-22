@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lojang_test/features/home/components/default_navigation_bar.dart';
 import 'package:lojang_test/features/home/home_view_model.dart';
 import 'package:lojang_test/support/style/app_colors.dart';
 
@@ -42,13 +43,12 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 centerTitle: true,
                 bottom: PreferredSize(
-                  preferredSize: const Size(double.infinity, 80),
-                  child: NavigationBar(
-                    elevation: 0,
-                    backgroundColor: AppColors.salmon,
-                    onDestinationSelected: viewModel.changeCurrentIndex,
-                    selectedIndex: viewModel.currentIndex,
+                  preferredSize: const Size(double.infinity, 100),
+                  child: DefaultNavigationBar(
+                    backgroundColor: AppColors.salmon05,
                     indicatorColor: AppColors.white,
+                    selectedIndex: viewModel.currentIndex,
+                    onDestinationSelected: viewModel.changeCurrentIndex,
                     destinations: const [
                       DefaultNavigationDestination(title: 'Videos'),
                       DefaultNavigationDestination(title: 'Artigos'),
@@ -59,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             Positioned.fill(
-              top: 190,
+              top: 180,
               child: IndexedStack(
                 index: viewModel.currentIndex,
                 children: const [
