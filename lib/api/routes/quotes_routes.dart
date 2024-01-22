@@ -1,14 +1,13 @@
 import 'package:lojang_test/api/models/endpoint.dart';
 import 'package:lojang_test/api/setup/api_provider.dart';
 import 'package:lojang_test/features/quotes/quote.dart';
-import 'package:lojang_test/support/constants.dart';
 
-import '../../services/local_storage/local_storage_helper.dart';
+import '../../services/connectivity/check_connectivity.dart';
 import '../../services/service/service_locator.dart';
+import '../errors/connectivity_error.dart';
 
 class QuotesRoutes {
   final _apiProvider = getIt.get<ApiProvider>();
-  final LocalStorageDb db = getIt.get<LocalStorageDb>();
 
   Future<List<Quote>> getQuotes({required int page}) async {
     final endpoint = Endpoint(path: 'quotes2?page=$page', method: 'GET');
@@ -17,16 +16,16 @@ class QuotesRoutes {
       final response = await _apiProvider.request(endpoint: endpoint);
       final quotes = Quote.fromMapList(response.data['list']);
 
-      await db.saveData(quotes: quotes);
-
       return quotes;
     } catch (e) {
-      final response = await db.retrieveData(tableName: Constants.quotesTable);
-      final quotes = Quote.fromMapList(response);
+      final cachedResponse = await _apiProvider.request(endpoint: endpoint);
+      final quotes = Quote.fromMapList(cachedResponse.data['list']);
 
       if (quotes.isNotEmpty) return quotes;
 
-      throw Exception('Erro de mapeamento');
+      if (!await CheckConnectivity.checkDeviceConnectivity()) throw ConnectivityError();
+
+      throw Exception();
     }
   }
 }
