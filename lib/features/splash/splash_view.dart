@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lojang_test/features/home/home_view.dart';
 import 'package:lojang_test/features/splash/splash_view_model.dart';
+import 'package:lojang_test/support/components/svg_viewer.dart';
 import 'package:lojang_test/support/style/app_colors.dart';
 
 class SplashView extends StatefulWidget {
@@ -40,17 +40,17 @@ class _SplashViewState extends State<SplashView> {
             child: Center(
               child: AnimatedContainer(
                 duration: const Duration(seconds: 3),
-                curve: Curves.easeInBack,
+                curve: Curves.linear,
                 onEnd: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeView()));
                 },
                 width: animatedWidth(MediaQuery.of(context).size.width),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
-                  child: AspectRatio(
+                  child: const AspectRatio(
                     aspectRatio: 1,
-                    child: SvgPicture.asset(
-                      'assets/images/lojong_logo.svg',
+                    child: SvgViewer.asset(
+                      assetName: 'assets/images/lojong_logo.svg',
                       fit: BoxFit.cover,
                     ),
                   ),

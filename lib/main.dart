@@ -5,6 +5,8 @@ import 'package:lojang_test/services/service/service_locator.dart';
 import 'package:lojang_test/services/sync_manager/sync_manager_helper.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   setupServices();
 
   final SyncManagerHelper syncManager = SyncManagerHelper();
