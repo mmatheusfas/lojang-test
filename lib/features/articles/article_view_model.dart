@@ -11,13 +11,13 @@ class ArticlesViewModel extends ChangeNotifier {
   var _articles = <Article>[];
   int _page = 1;
   var _isLoading = false;
-  var _connectivityError = '';
+  var _errorMessage = '';
 
   ScrollController get getScrollController => _scrollController;
   int get getPage => _page;
   List<Article> get articlesList => _articles;
   bool get isLoading => _isLoading;
-  String get connectivityError => _connectivityError;
+  String get errorMessage => _errorMessage;
   bool get isFullyScrolled => _scrollController.position.pixels == _scrollController.position.maxScrollExtent;
 
   void getArticles() async {
@@ -29,13 +29,13 @@ class ArticlesViewModel extends ChangeNotifier {
         _articles.add(article);
       }
       _page++;
-      _connectivityError = '';
+      _errorMessage = '';
       _changeIsLoading(isLoading: false);
     } on ConnectivityError catch (e) {
-      _connectivityError = e.message;
+      _errorMessage = e.message;
       _changeIsLoading(isLoading: false);
     } catch (e) {
-      _connectivityError = 'Erro desconhecido, tente novamente mais tarde';
+      _errorMessage = 'Erro desconhecido, tente novamente mais tarde';
       _changeIsLoading(isLoading: false);
     }
   }

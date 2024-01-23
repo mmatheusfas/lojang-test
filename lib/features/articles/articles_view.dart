@@ -4,6 +4,7 @@ import 'package:lojang_test/support/components/infinity_scroll_loading.dart';
 import 'package:lojang_test/support/style/app_colors.dart';
 
 import '../../support/components/default_list_tile.dart';
+import '../../support/placeholders/error_placeholder.dart';
 import 'article_view_model.dart';
 
 class ArticlesView extends StatefulWidget {
@@ -44,6 +45,12 @@ class _ArticlesViewState extends State<ArticlesView> {
           builder: (_, snapshot) {
             if (viewModel.isLoading && viewModel.articlesList.isEmpty) {
               return const DefaultLoading();
+            }
+
+            if (viewModel.errorMessage.isNotEmpty) {
+              return ErrorPlaceHolder(
+                errorMessage: viewModel.errorMessage,
+              );
             }
 
             return Stack(

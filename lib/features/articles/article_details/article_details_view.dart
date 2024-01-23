@@ -65,57 +65,58 @@ class _ArticleDetailsViewState extends State<ArticleDetailsView> {
                   }
 
                   if (viewModel.connectivityError.isNotEmpty) {
-                    return Expanded(
-                      child: ErrorPlaceHolder(
-                        errorMessage: viewModel.connectivityError,
-                        onTapReload: () {
-                          viewModel.didTapReload(id: widget.article.id);
-                        },
-                      ),
+                    return ErrorPlaceHolder(
+                      errorMessage: viewModel.connectivityError,
+                      onTapReload: () {
+                        viewModel.didTapReload(id: widget.article.id);
+                      },
                     );
                   }
 
                   return SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        AspectRatio(
-                          aspectRatio: 16 / 9,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: AppColors.grey,
-                                  blurRadius: 3,
-                                  blurStyle: BlurStyle.outer,
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(16),
-                              image: DecorationImage(
-                                fit: BoxFit.fill,
-                                image: CachedNetworkImageProvider(viewModel.detailedArticle?.imageUrl ?? ''),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          AspectRatio(
+                            aspectRatio: 16 / 9,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: AppColors.grey,
+                                    blurRadius: 3,
+                                    blurStyle: BlurStyle.outer,
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(16),
+                                image: DecorationImage(
+                                  fit: BoxFit.fill,
+                                  image: CachedNetworkImageProvider(viewModel.detailedArticle?.imageUrl ?? ''),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 24),
-                        Text(
-                          viewModel.detailedArticle?.title ?? '',
-                          textAlign: TextAlign.center,
-                          style: AppFonts.asapSemiBold(18, AppColors.black05),
-                        ),
-                        const SizedBox(height: 16),
-                        Html(data: viewModel.detailedArticle?.fullText ?? ''),
-                        const SizedBox(height: 16),
-                        AuthorCard(detailedArticle: viewModel.detailedArticle),
-                        const SizedBox(height: 20),
-                        ShareButton(
-                          primaryColor: AppColors.white,
-                          backgroundColor: AppColors.salmon,
-                          shareUrl: viewModel.detailedArticle?.articleUrl ?? '',
-                          hasIcon: false,
-                        ),
-                      ],
+                          const SizedBox(height: 24),
+                          Text(
+                            viewModel.detailedArticle?.title ?? '',
+                            textAlign: TextAlign.center,
+                            style: AppFonts.asapSemiBold(18, AppColors.black05),
+                          ),
+                          const SizedBox(height: 16),
+                          Html(data: viewModel.detailedArticle?.fullText ?? ''),
+                          const SizedBox(height: 16),
+                          AuthorCard(detailedArticle: viewModel.detailedArticle),
+                          const SizedBox(height: 20),
+                          ShareButton(
+                            primaryColor: AppColors.white,
+                            backgroundColor: AppColors.salmon,
+                            shareUrl: viewModel.detailedArticle?.articleUrl ?? '',
+                            hasIcon: false,
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },

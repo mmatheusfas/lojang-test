@@ -59,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             Positioned.fill(
-              top: 180,
+              top: 190,
               child: IndexedStack(
                 index: viewModel.currentIndex,
                 children: const [

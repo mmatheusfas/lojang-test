@@ -38,10 +38,8 @@ class _VideosViewState extends State<VideosView> {
           }
 
           if (viewModel.errorMessage.isNotEmpty) {
-            return Expanded(
-              child: ErrorPlaceHolder(
-                errorMessage: viewModel.errorMessage,
-              ),
+            return ErrorPlaceHolder(
+              errorMessage: viewModel.errorMessage,
             );
           }
 

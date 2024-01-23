@@ -48,10 +48,8 @@ class _QuotesViewState extends State<QuotesView> {
             }
 
             if (viewModel.erroMessage.isNotEmpty) {
-              return Expanded(
-                child: ErrorPlaceHolder(
-                  errorMessage: viewModel.erroMessage,
-                ),
+              return ErrorPlaceHolder(
+                errorMessage: viewModel.erroMessage,
               );
             }
 
