@@ -27,10 +27,8 @@ class VideosViewModel extends ChangeNotifier {
       _changeIsLoading(isLoading: false);
       return null;
     } catch (e) {
-      _errorMessage = 'Erro desconhecido, tente novamente mais tarde';
       _changeIsLoading(isLoading: false);
     }
-    return null;
   }
 
   void _changeIsLoading({required bool isLoading}) {

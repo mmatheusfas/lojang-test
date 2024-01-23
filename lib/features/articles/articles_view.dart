@@ -50,6 +50,7 @@ class _ArticlesViewState extends State<ArticlesView> {
             if (viewModel.errorMessage.isNotEmpty) {
               return ErrorPlaceHolder(
                 errorMessage: viewModel.errorMessage,
+                onTapReload: viewModel.updateVideosList,
               );
             }
 

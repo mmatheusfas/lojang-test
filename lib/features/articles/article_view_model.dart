@@ -35,7 +35,6 @@ class ArticlesViewModel extends ChangeNotifier {
       _errorMessage = e.message;
       _changeIsLoading(isLoading: false);
     } catch (e) {
-      _errorMessage = 'Erro desconhecido, tente novamente mais tarde';
       _changeIsLoading(isLoading: false);
     }
   }
