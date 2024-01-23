@@ -13,6 +13,10 @@ A aplicação incorpora a capacidade de armazenamento em cache utilizando o Dio 
 * [Dart](https://maven.apache.org/](https://dart.dev))
 * [Dio](https://rometools.github.io/rome/](https://pub.dev/packages/dio))
 
+### 🔧 Instalação
+
+* [APK](https://drive.google.com/drive/folders/12IzPHS2D7loyb88VCkFU0T3KMuFIyul9?usp=drive_link)
+
 ## 📱 Demonstração
 
 -> **Nexus One**
@@ -33,5 +37,5 @@ A aplicação incorpora a capacidade de armazenamento em cache utilizando o Dio 
 
 ## ✒️ Autores
 
-* **Matheus Felipe** - *Desenvolvedor Flutter* - [GitHub](https://github.com/linkParaPerfil](https://www.linkedin.com/in/matheus-felipe-477216208/))
+* **Matheus Felipe** - *Desenvolvedor Flutter* - [Linkedin](https://www.linkedin.com/in/matheus-felipe-477216208/)
 
