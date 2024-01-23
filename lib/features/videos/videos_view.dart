@@ -29,7 +29,7 @@ class _VideosViewState extends State<VideosView> {
         topLeft: Radius.circular(32),
         topRight: Radius.circular(32),
       ),
-      color: AppColors.lightGrey,
+      color: AppColors.white,
       child: ListenableBuilder(
         listenable: viewModel,
         builder: (context, snapshot) {

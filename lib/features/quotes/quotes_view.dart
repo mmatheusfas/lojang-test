@@ -37,7 +37,7 @@ class _QuotesViewState extends State<QuotesView> {
         topLeft: Radius.circular(32),
         topRight: Radius.circular(32),
       ),
-      color: AppColors.lightGrey,
+      color: AppColors.white,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: ListenableBuilder(

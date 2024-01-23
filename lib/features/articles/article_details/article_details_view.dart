@@ -50,7 +50,7 @@ class _ArticleDetailsViewState extends State<ArticleDetailsView> {
               topLeft: Radius.circular(32),
               topRight: Radius.circular(32),
             ),
-            color: AppColors.lightGrey,
+            color: AppColors.white,
             child: Container(
               padding: const EdgeInsets.all(16),
               child: ListenableBuilder(
